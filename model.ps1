@@ -25,6 +25,12 @@ class reports
         
         return $dset; # Übergabe als DataSet
     }
+
+    [System.Data.DataSet]delete($reportID) # Aus DB auslesen und Übergeben
+    {
+        $dset = $Global:sql.query("DELETE FROM reports WHERE reportID='$reportID';");
+        return $dset; # Übergabe als DataSet
+    }
 }
 
 ####################################
@@ -95,6 +101,23 @@ class search
                 LEFT JOIN computer ON report.computerID = computer.computerID
             WHERE $table.$field = '$value';");
 
+        return $dset; # übergabe als DataSet
+    }
+}
+
+####################################
+# check for user (login)
+####################################
+
+class login
+{
+    login()
+    {
+    }
+
+    [System.Data.DataSet]check($user,$passwd) # Aus DB auslesen und Übergeben
+    {
+        $dset = $Global:sql.query("SELECT COUNT(*) FROM login WHERE username='$user' AND password='$passwd';"); # nach benutzer in der DB suchen
         return $dset; # übergabe als DataSet
     }
 }

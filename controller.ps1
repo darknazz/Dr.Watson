@@ -45,7 +45,7 @@ function updateGrid($dataset)
     $dataGridWER.DataSource = $null; # set empty grib
     $dataGridWER.DataSource = $dataset.Tables[0]; # set dataset to datagrid
     $dataGridWER.DataBind; # bind data to grid
-    $form1.refresh(); # refresh grid
+    $form2.refresh(); # refresh grid
 }
 
 ####################################
@@ -78,4 +78,58 @@ function loadAll
     getAllUsers;
     getAllComputers;
     getAllReports;
+}
+
+####################################
+#  Export to Excel
+###################################
+function exportToExcel($dset)
+{
+    Import-Module PSExcel 
+    $dset | Export-XLSX C:\Users\t.schneider1\Desktop\Export.xlsx
+}
+
+####################################
+#  check login
+###################################
+function login
+{
+
+    $user = $userBox.text;
+    $pass = $passwordBox.text;
+
+    $login = [login]::new(); # init class
+    $dataset = $login.check($user,$pass); #check for login
+    $loginArray = $Global:sql.dataSetToArray($dataset,0); # dataset to list
+
+    if($loginArray[0])
+    {
+        gui
+    }
+    else
+    {
+        Add-Type –AssemblyName System.Windows.Forms
+        [Windows.Forms.MessageBox]::Show('Benutzername oder Passwort falsch','Fehler','OK','Error');
+        $form1.Close();
+    }
+}
+
+####################################
+#  Delete Report
+###################################
+function deleteReport()
+{
+    $reports = [reports]::new(); # class init
+
+    $data=New-Object System.Collections.ArrayList
+
+    for($j=0;$j -le ($dataGridWER.RowCount - 2); $j++)
+    {
+        $dataGridWER.Rows[$j].Selected = $true
+        for($i=0;$i -le ($dataGridWER.Columns.Count -1);$i++)
+        {
+            $data.Add($dataGridWER.Rows[$j].Cells[$i].Value)
+        }
+    }
+    write-host $data
 }

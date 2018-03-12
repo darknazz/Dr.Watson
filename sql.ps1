@@ -4,11 +4,6 @@
 [void][System.Reflection.Assembly]::LoadWithPartialName("MySql.Data") # MySQL for .Net landen
 
 ####################################
-# MySQL Connect
-####################################
-$Global:sql = [sql]::new("localhost","root","","watson_12fi2"); # MySQL Verbindung aufbauen
-
-####################################
 # Klasse
 ####################################
 class sql
