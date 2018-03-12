@@ -23,7 +23,7 @@ $cboUser = New-Object System.Windows.Forms.ComboBox
 $tableBox = New-Object System.Windows.Forms.GroupBox
 $btnExport = New-Object System.Windows.Forms.Button
 $btnDeleteReport = New-Object System.Windows.Forms.Button
-$dataGridWER = New-Object System.Windows.Forms.DataGrid
+$dataGridWER = New-Object System.Windows.Forms.DataGridView
 $InitialFormWindowState = New-Object System.Windows.Forms.FormWindowState
 #endregion Generated Form Objects
 
@@ -236,7 +236,7 @@ $tableBox.Controls.Add($btnDeleteReport)
 
 $dataGridWER.DataBindings.DefaultDataSourceUpdateMode = 0
 $dataGridWER.DataMember = ""
-$dataGridWER.HeaderForeColor = [System.Drawing.Color]::FromArgb(255,0,0,0)
+#$dataGridWER.HeaderForeColor = [System.Drawing.Color]::FromArgb(255,0,0,0)
 $System_Drawing_Point = New-Object System.Drawing.Point
 $System_Drawing_Point.X = 12
 $System_Drawing_Point.Y = 12

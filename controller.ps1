@@ -17,6 +17,8 @@ function getAllUsers
     $userlist = $user.getAll();
     $userarray = $Global:sql.dataSetToArray($userlist,0); # dataset to array for listfield
 
+    $cboUser.Items.Clear();
+
     foreach($user in $userarray) # for each item in array
     {
         $cboUser.Items.Add($user); # add user to list
@@ -32,6 +34,7 @@ function getAllComputers
     $computerList = $computer.getAll(); # get all pc´s
     $computerArray = $Global:sql.dataSetToArray($computerList,3); # dataset to list
 
+    $cboRechner.Items.Clear();
     foreach($computer in $computerArray)
     {
         $cboRechner.Items.Add($computer); # pc to list
@@ -86,7 +89,7 @@ function loadAll
 function exportToExcel($dset)
 {
     Import-Module PSExcel 
-    $dset | Export-XLSX C:\Users\t.schneider1\Desktop\Export.xlsx
+    $dset | Select-Object ReportID,Type,Zeit,BucketID,Anwendung,Username,Macadresse,System,Rechner | Export-XLSX C:\Users\t.schneider1\Desktop\Export.xlsx
 }
 
 ####################################
@@ -121,15 +124,12 @@ function deleteReport()
 {
     $reports = [reports]::new(); # class init
 
-    $data=New-Object System.Collections.ArrayList
-
-    for($j=0;$j -le ($dataGridWER.RowCount - 2); $j++)
+    for($j=0; $j -le ($dataGridWER.RowCount); $j++)
     {
-        $dataGridWER.Rows[$j].Selected = $true
-        for($i=0;$i -le ($dataGridWER.Columns.Count -1);$i++)
+        if($dataGridWER.Rows[$j].Selected -eq $true)
         {
-            $data.Add($dataGridWER.Rows[$j].Cells[$i].Value)
+            $reports.delete($dataGridWER.Rows[$j].Cells[0].Value);
         }
     }
-    write-host $data
+    loadAll;
 }

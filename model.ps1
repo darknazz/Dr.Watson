@@ -28,7 +28,7 @@ class reports
 
     [System.Data.DataSet]delete($reportID) # Aus DB auslesen und Übergeben
     {
-        $dset = $Global:sql.query("DELETE FROM reports WHERE reportID='$reportID';");
+        $dset = $Global:sql.query("DELETE FROM report WHERE reportID='$reportID';");
         return $dset; # Übergabe als DataSet
     }
 }
