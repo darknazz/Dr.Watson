@@ -236,6 +236,7 @@ $tableBox.Controls.Add($btnDeleteReport)
 
 $dataGridWER.DataBindings.DefaultDataSourceUpdateMode = 0
 $dataGridWER.DataMember = ""
+$dataGridWER.Autosize = $false
 #$dataGridWER.HeaderForeColor = [System.Drawing.Color]::FromArgb(255,0,0,0)
 $System_Drawing_Point = New-Object System.Drawing.Point
 $System_Drawing_Point.X = 12
