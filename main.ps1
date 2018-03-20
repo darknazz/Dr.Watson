@@ -4,15 +4,26 @@
 $Global:sql;
 
 ####################################
-# Klassen Laden
+# Change to your custom data
+####################################
+
+$data_dir = "H:\Schule\12FI2\AWP\Whatson\";
+
+$mysql_host = "localhost";
+$mysql_user = "root";
+$mysql_pass = "";
+$mysql_db = "watson_12fi2"
+
+####################################
+# Includes Laden
 ####################################
 try 
 {
-    . ("H:\Schule\12FI2\AWP\Whatson\sql.ps1")
-    . ("H:\Schule\12FI2\AWP\Whatson\model.ps1")
-    . ("H:\Schule\12FI2\AWP\Whatson\controller.ps1")
-    . ("H:\Schule\12FI2\AWP\Whatson\gui_final.ps1")
-    . ("H:\Schule\12FI2\AWP\Whatson\loginView.ps1")
+    . ("$data_dir\sql.ps1")
+    . ("$data_dir\model.ps1")
+    . ("$data_dir\controller.ps1")
+    . ("$data_dir\gui_final.ps1")
+    . ("$data_dir\loginView.ps1")
 }
 catch [Exception]
 {
@@ -27,9 +38,9 @@ catch [Exception]
 ####################################
 # MySQL Connect
 ####################################
-$Global:sql = [sql]::new("localhost","root","","watson_12fi2"); # MySQL Verbindung aufbauen
+$Global:sql = [sql]::new($mysql_host,$mysql_user,$mysql_pass,$mysql_db); # MySQL Verbindung aufbauen
 
-loginView
+loginView # start with login
 
 ####################################
 # Programm ENDE
