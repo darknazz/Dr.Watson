@@ -103,7 +103,7 @@ $System_Drawing_Size.Height = 23
 $System_Drawing_Size.Width = 75
 $btnReset.Size = $System_Drawing_Size
 $btnReset.TabIndex = 4
-$btnReset.Text = "löschen"
+$btnReset.Text = "reset"
 $btnReset.UseVisualStyleBackColor = $True
 $btnReset.add_Click($btnReset_OnClick)
 
