@@ -96,7 +96,7 @@ function exportToExcel($dset)
     $dialog.InitialDirectory = "C:\"
     $dialog.CheckFileExists = $false;
 
-    if($dlg.ShowDialog() -eq 'Ok')
+    if($dialog.ShowDialog() -eq 'Ok')
     {
         Import-Module PSExcel 
         $dset | Select-Object ReportID,Type,Zeit,BucketID,Anwendung,Username,Macadresse,System,Rechner | Export-XLSX $($dlg.filename)
