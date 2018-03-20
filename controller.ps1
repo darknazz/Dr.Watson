@@ -88,8 +88,19 @@ function loadAll
 ###################################
 function exportToExcel($dset)
 {
-    Import-Module PSExcel 
-    $dset | Select-Object ReportID,Type,Zeit,BucketID,Anwendung,Username,Macadresse,System,Rechner | Export-XLSX C:\Users\t.schneider1\Desktop\Export.xlsx
+    #save dialog
+    Add-Type -AssemblyName System.Windows.Forms
+    $dialog = New-Object System.Windows.Forms.SaveFileDialog
+    $dialog.Filter = "Excel Worksheet (*.xls)|*.xls|Excel 2013 Worksheet (*.xlsx)|*.xlsx"
+    $dialog.SupportMultiDottedExtensions = $true;
+    $dialog.InitialDirectory = "C:\"
+    $dialog.CheckFileExists = $false;
+
+    if($dlg.ShowDialog() -eq 'Ok')
+    {
+        Import-Module PSExcel 
+        $dset | Select-Object ReportID,Type,Zeit,BucketID,Anwendung,Username,Macadresse,System,Rechner | Export-XLSX $($dlg.filename)
+    }
 }
 
 ####################################
