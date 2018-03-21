@@ -118,6 +118,7 @@ function login
 
     if($loginArray[0])
     {
+        $form2.Close();
         gui
     }
     else
